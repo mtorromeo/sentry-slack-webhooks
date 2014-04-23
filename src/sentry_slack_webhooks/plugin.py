@@ -146,15 +146,14 @@ class SlackWebHooksPlugin(notify.NotificationPlugin):
             else:
                 payload['icon_emoji'] = icon
 
-        values = {'payload': json.dumps(payload)}
+        data = {'payload': json.dumps(payload)}
 
-        data = urllib.urlencode(values)
+        data = urllib.urlencode(data)
         request = urllib2.Request(webhook, data)
         request.add_header('User-Agent', 'sentry-slack-webhooks/%s' % self.version)
-        request.add_header('Content-Type', 'application/json')
         try:
-            urllib2.urlopen(request)
-        except urllib2.URLError:
-            logger.error('Could not connect to Slack.')
+            return urllib2.urlopen(request).read()
+        except urllib2.URLError as e:
+            self.logger.error('Could not connect to Slack: %s', e.read())
         except urllib2.HTTPError as e:
-            logger.error('Error posting to Slack: %s', e.read())
+            self.logger.error('Error posting to Slack: %s', e.read())
