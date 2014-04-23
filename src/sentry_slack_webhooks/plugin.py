@@ -97,7 +97,7 @@ class SlackWebHooksPlugin(notify.NotificationPlugin):
 
     def notify_users(self, group, event, fail_silently=False):
         subdomain = self.get_option('subdomain', event.project)
-        token = self.get_option('subdomain', event.project)
+        token = self.get_option('token', event.project)
         channel = self.get_option('channel', event.project)
         username = self.get_option('username', event.project)
         icon = self.get_option('icon', event.project)
