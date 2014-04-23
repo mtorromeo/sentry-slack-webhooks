@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 """
-sentry-webhooks
-===============
+sentry-slack-webhooks
+=====================
 
-An extension for Sentry which allows creation various web hooks.
+An extension for Sentry which allows to push events to the slack incoming webhooks.
+
+Project forked from the generic sentry-webhooks plugin.
 
 :copyright: (c) 2012 by the Sentry Team, see AUTHORS for more details.
 :license: BSD, see LICENSE for more details.
@@ -21,12 +23,12 @@ install_requires = [
 ]
 
 setup(
-    name='sentry-webhooks',
-    version='0.2.0',
-    author='David Cramer',
-    author_email='dcramer@gmail.com',
-    url='http://github.com/getsentry/sentry-webhooks',
-    description='A Sentry extension which integrates web hooks.',
+    name='sentry-slack-webhooks',
+    version='0.1.0',
+    author='Massimiliano Torromeo',
+    author_email='massimiliano.torromeo@gmail.com',
+    url='http://github.com/mtorromeo/sentry-slack-webhooks',
+    description='A Sentry extension which pushes events to the slack incoming webhooks.',
     long_description=__doc__,
     license='BSD',
     package_dir={'': 'src'},
@@ -39,10 +41,10 @@ setup(
     include_package_data=True,
     entry_points={
        'sentry.apps': [
-            'webhooks = sentry_webhooks',
+            'webhooks = sentry_slack_webhooks',
         ],
        'sentry.plugins': [
-            'webhooks = sentry_webhooks.plugin:WebHooksPlugin'
+            'webhooks = sentry_slack_webhooks.plugin:SlackWebHooksPlugin'
         ],
     },
     classifiers=[

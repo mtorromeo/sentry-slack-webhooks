@@ -1,30 +1,15 @@
-sentry-webhooks
-===============
+sentry-slack-webhooks
+=====================
 
-An extension for Sentry that adds support for creating various web hooks.
+An extension for Sentry which allows to push events to the slack incoming webhooks.
+
+Project forked from the generic sentry-webhooks plugin.
 
 Install
 -------
 
 Install the package via ``pip``::
 
-    pip install sentry-webhooks
+    pip install sentry-slack-webhooks
 
-You can now configure webhooks via the plugin configuration panel within your project.
-
-Callback Receivers
-------------------
-
-Your callback will receive a POST request whenever there is a new event, with the following data
-as JSON:
-
-::
-
-    {
-        'id': '134343',
-        'project': 'project-slug',
-        'message': 'This is an example',
-        'culprit': 'foo.bar.baz',
-        'logger': 'root',
-        'level': 'error'
-    }
+You can now configure slack webhooks via the plugin configuration panel within your project.

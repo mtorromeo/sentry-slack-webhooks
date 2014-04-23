@@ -1,3 +1,3 @@
 include setup.py README.rst MANIFEST.in LICENSE
-recursive-include src/sentry_webhooks/templates *
+recursive-include src/sentry_slack_webhooks/templates *
 global-exclude *~
