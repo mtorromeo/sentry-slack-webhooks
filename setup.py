@@ -24,7 +24,7 @@ install_requires = [
 
 setup(
     name='sentry-slack-webhooks',
-    version='0.1.0',
+    version='0.2.0',
     author='Massimiliano Torromeo',
     author_email='massimiliano.torromeo@gmail.com',
     url='http://github.com/mtorromeo/sentry-slack-webhooks',

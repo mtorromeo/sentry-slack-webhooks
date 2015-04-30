@@ -33,13 +33,10 @@ LEVEL_TO_COLOR = {
 
 
 class SlackWebHooksOptionsForm(forms.Form):
-    subdomain = forms.CharField(
-        label=_('Subdomain'),
+    webhook = forms.CharField(
+        label=_('WebHook URL'),
         widget=forms.TextInput(attrs={'class': 'span6'}),
-        help_text=_('Ex. foo for foo.slack.com.'))
-    token = forms.CharField(
-        label=_('Token'),
-        widget=forms.TextInput(attrs={'class': 'span6'}))
+        help_text=_('Ex. https://hooks.slack.com/services/FOO/BAR/BAZ.'))
     channel = forms.CharField(
         label=_('Channel'),
         widget=forms.TextInput(attrs={'class': 'span6'}),
@@ -86,7 +83,7 @@ class SlackWebHooksPlugin(notify.NotificationPlugin):
     logger = logging.getLogger('sentry.plugins.slack-webhooks')
 
     def is_configured(self, project, **kwargs):
-        return all((self.get_option(k, project) for k in ('subdomain', 'token', 'channel')))
+        return all((self.get_option(k, project) for k in ('webhook', 'channel')))
 
     def should_notify(self, group, event):
         # Always notify since this is not a per-user notification
@@ -96,13 +93,10 @@ class SlackWebHooksPlugin(notify.NotificationPlugin):
         return '#' + LEVEL_TO_COLOR.get(group.get_level_display(), 'error')
 
     def notify_users(self, group, event, fail_silently=False):
-        subdomain = self.get_option('subdomain', event.project)
-        token = self.get_option('token', event.project)
+        webhook = self.get_option('webhook', event.project)
         channel = self.get_option('channel', event.project)
         username = self.get_option('username', event.project)
         icon = self.get_option('icon', event.project)
-
-        webhook = 'https://{0}.slack.com/services/hooks/incoming-webhook?token={1}'.format(subdomain, token)
 
         project = event.project
         team = event.team
