@@ -10,14 +10,13 @@ import sentry_slack_webhooks
 
 import re
 import urllib
-import urllib2
-import logging
 from cgi import escape
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from urlparse import urlparse
 
+from sentry import http
 from sentry.plugins.bases import notify
 from sentry.utils import json
 
@@ -141,13 +140,4 @@ class SlackWebHooksPlugin(notify.NotificationPlugin):
                 payload['icon_emoji'] = icon
 
         data = {'payload': json.dumps(payload)}
-
-        data = urllib.urlencode(data)
-        request = urllib2.Request(webhook, data)
-        request.add_header('User-Agent', 'sentry-slack-webhooks/%s' % self.version)
-        try:
-            return urllib2.urlopen(request).read()
-        except urllib2.URLError as e:
-            self.logger.error('Could not connect to Slack: %s', e.read())
-        except urllib2.HTTPError as e:
-            self.logger.error('Error posting to Slack: %s', e.read())
+        return http.safe_urlopen(webhook, method='POST', data=data)
