@@ -92,6 +92,9 @@ class SlackWebHooksPlugin(notify.NotificationPlugin):
         return '#' + LEVEL_TO_COLOR.get(group.get_level_display(), 'error')
 
     def notify_users(self, group, event, fail_silently=False):
+        if not self.is_configured(group.project):
+            return
+        
         webhook = self.get_option('webhook', event.project)
         channel = self.get_option('channel', event.project)
         username = self.get_option('username', event.project)
