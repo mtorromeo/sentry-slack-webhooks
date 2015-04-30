@@ -17,6 +17,6 @@ You can now configure slack webhooks via the plugin configuration panel within y
 CHANGELOG
 ---------
 
-0.2.0
+0.3.0
 '''''
 * Changed *subdomain* and *token* options to a full webhook URL.

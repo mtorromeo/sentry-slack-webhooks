@@ -6,9 +6,6 @@ sentry-slack-webhooks
 An extension for Sentry which allows to push events to the slack incoming webhooks.
 
 Project forked from the generic sentry-webhooks plugin.
-
-:copyright: (c) 2012 by the Sentry Team, see AUTHORS for more details.
-:license: BSD, see LICENSE for more details.
 """
 from setuptools import setup, find_packages
 
@@ -24,10 +21,11 @@ install_requires = [
 
 setup(
     name='sentry-slack-webhooks',
-    version='0.2.0',
+    version='0.3.0',
     author='Massimiliano Torromeo',
     author_email='massimiliano.torromeo@gmail.com',
-    url='http://github.com/mtorromeo/sentry-slack-webhooks',
+    url='https://github.com/mtorromeo/sentry-slack-webhooks',
+    download_url="https://github.com/mtorromeo/sentry-slack-webhooks/archive/0.3.0.tar.gz",
     description='A Sentry extension which pushes events to the slack incoming webhooks.',
     long_description=__doc__,
     license='BSD',
