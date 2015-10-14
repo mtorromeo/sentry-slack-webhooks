@@ -10,6 +10,7 @@ import sentry_slack_webhooks
 
 import re
 import urllib
+import logging
 from cgi import escape
 
 from django import forms
